@@ -1,0 +1,12 @@
+def run(arc_A: float) -> float:
+    PI = 3.14
+    square_side = PI * arc_A**2
+    area = square_side * square_side
+    return area
+
+
+# DO NOT TOUCH THE CODE BELOW
+if __name__ == '__main__':
+    import vendor
+
+    vendor.launch(run)
