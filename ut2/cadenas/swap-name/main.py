@@ -1,5 +1,5 @@
 def run(name: str, surname: str) -> str:
-    # TODO
+    fullname = f'{surname},' ' {name}'
     return fullname
 
 
