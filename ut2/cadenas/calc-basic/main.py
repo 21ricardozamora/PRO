@@ -11,6 +11,8 @@ def run():
     print(number1, '/', number2, '=', result_div, sep='')
 
 
+asdasd
+
 # DO NOT TOUCH THE CODE BELOW
 if __name__ == '__main__':
     import vendor
