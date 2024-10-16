@@ -1,5 +1,6 @@
 def run(text: str) -> str:
-    # TODO
+    lengh_text = len(text)
+    stext = text[1 : lengh_text - 1]
     return stext
 
 

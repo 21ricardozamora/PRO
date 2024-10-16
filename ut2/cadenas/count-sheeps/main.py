@@ -1,5 +1,6 @@
 def run(num_sheeps: int) -> str:
-    # TODO
+    sheep = 'sheep...'
+    sleep = sheep * num_sheeps
     return sleep
 
 
