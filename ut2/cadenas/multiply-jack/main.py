@@ -1,5 +1,7 @@
 def run(n: int) -> int:
-    # TODO
+    positive_number = abs(n)
+    lenght_n = len(str(positive_number))
+    result = n * 5 ** (lenght_n)
     return result
 
 
