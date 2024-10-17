@@ -1,11 +1,10 @@
 def run(year: int) -> bool:
-    if year % 4 == 0:
+    if year % 4 == 0 and year % 100 != 0:
         is_leap_year = True
-    elif year % 100 != 0:
-        is_leap_year = False
+    elif year % 400 == 0:
+        is_leap_year = True
     else:
-        if year % 400 == 0:
-            is_leap_year = True
+        is_leap_year = False
 
     return is_leap_year
 
