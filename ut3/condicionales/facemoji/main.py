@@ -1,5 +1,17 @@
 def run(feeling: str) -> str:
-    # TODO
+    match feeling.lower():
+        case 'happy':
+            emoji = '😀'
+        case 'sad':
+            emoji = '😔'
+        case 'angry':
+            emoji = '😡'
+        case 'pensive':
+            emoji = '🤔'
+        case 'surprised':
+            emoji = '😮'
+        case _:
+            emoji = None
     return emoji
 
 
