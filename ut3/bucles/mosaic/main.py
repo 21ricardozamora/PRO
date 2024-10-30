@@ -1,6 +1,11 @@
 def run(size: int) -> None:
-    # TODO
+    for i in range(5):
+        for j in range(5):
+            print('X', end=' ')
+        print()
 
+
+# bloque de 5x5, construir a partir de aquí
 
 run(5)
 
