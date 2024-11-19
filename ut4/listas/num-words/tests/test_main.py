@@ -8,14 +8,9 @@ else:
     import main  # type:ignore
 
 testdata = [
-    ('lumberjacks', True),
-    ('background', True),
-    ('downstream', True),
-    ('six-year-old', True),
-    ('circus', False),
-    ('fantastical', False),
-    ('left-hand-side', False),
-    ('symmetrical', False),
+    ('Before software can be reusable it first has to be usable', 11),
+    ('You should prefer readability over performance in almost all cases', 10),
+    ('Models are not right or wrong they are more or less useful', 12),
 ]
 
 
