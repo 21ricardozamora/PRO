@@ -2,9 +2,8 @@ def run(items: list) -> list:
     result = []
     index = 0
     for item in items:
-        if item not in result:
             result.append(item)
-            index += 1
+            if item == 
 
     return result
 

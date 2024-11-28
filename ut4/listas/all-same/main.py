@@ -1,0 +1,14 @@
+def run(items: list) -> bool:
+    all_same = True
+    for item in items[1:]:
+        if item != items[1]:
+            all_same = False
+            break
+    return all_same
+
+
+# DO NOT TOUCH THE CODE BELOW
+if __name__ == '__main__':
+    import vendor
+
+    vendor.launch(run)
