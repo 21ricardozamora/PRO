@@ -1,5 +1,10 @@
 def run(items: list) -> int:
-    # TODO
+    item = []
+    for char in items:
+        if isinstance(char, str):
+            char = int(char)
+        item.append(char)
+    sum_items = sum(item)
     return sum_items
 
 
