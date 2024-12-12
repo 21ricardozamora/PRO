@@ -3,11 +3,10 @@ def run(n: int) -> str:
     bin_repr = ''
     if n == 0:
         bin_repr = '0'
-    else:
-        while n > 0:
-            result.append(str(n % 2))
-            n //= 2
-            bin_repr = ''.join(result[::-1])
+    while n > 0:
+        result.append(str(n % 2))
+        n //= 2
+        bin_repr = ''.join(result[::-1])
     return bin_repr
 
 

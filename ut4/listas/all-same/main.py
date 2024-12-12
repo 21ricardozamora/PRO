@@ -1,6 +1,6 @@
 def run(items: list) -> bool:
     all_same = True
-    for item in items[1:]:
+    for item in items:
         if item != items[1]:
             all_same = False
             break
