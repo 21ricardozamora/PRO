@@ -1,14 +1,13 @@
 def run(text: str) -> dict:
     counter = {}
-    repeat_times = 0
-    letters = []
     for item in text:
-        if item not in letters:
-            letters.append(item)
+        if item not in counter:
+            repeat_times = 0
             repeat_times += 1
         else:
-            letters.append(item)
-        counter[letters] = repeat_times
+            repeat_item = counter.get(item) + 1
+            repeat_times = repeat_item
+        counter[item] = repeat_times
     return counter
 
 
