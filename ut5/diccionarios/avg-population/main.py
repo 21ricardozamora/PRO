@@ -1,4 +1,4 @@
-def run(pdata: dict) -> dict:
+ = def run(pdata: dict) -> dict:
     # TODO
     return avg_data
 
