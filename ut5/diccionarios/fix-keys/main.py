@@ -1,5 +1,10 @@
 def run(items: dict) -> dict:
-    # TODO
+    fitems = {}
+    keys_fitems = ''
+    for item in items.keys():
+        keys_fitems = item
+        keys_fitems = keys_fitems.strip().replace(' ', '')
+        fitems[keys_fitems] = items.get(item)
     return fitems
 
 

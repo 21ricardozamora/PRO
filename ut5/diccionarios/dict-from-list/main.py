@@ -1,5 +1,12 @@
 def run(items: list) -> dict:
-    # TODO
+    unpack_items = {}
+    keys_item = ''
+    values_item = []
+    for item in items:
+        if item[0] not in keys_item:
+            keys_item = item[0]
+            values_item = item[1:]
+            unpack_items[keys_item] = values_item
     return unpack_items
 
 
