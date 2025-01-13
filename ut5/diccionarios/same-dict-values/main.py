@@ -1,10 +1,10 @@
 def run(items: dict) -> bool:
+    items_values = list(items.values())
     all_same = True
-    for item in items:
-        value_items = items.get(item)
-        for _ in items.values():
-            if value_items != _:
-                all_same = False
+    for item in items_values:
+        value = items_values[0]
+        if value != item:
+            all_same = False
             break
     return all_same
 
