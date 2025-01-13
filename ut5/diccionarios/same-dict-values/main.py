@@ -1,11 +1,13 @@
 def run(items: dict) -> bool:
+    values = []
     all_same = True
-    for item in items:
+    for item in items.keys():
         value_item = items.get(item)
-        for item in items.values():
-            if item != value_item:
-                all_same = False
-                break
+        if value_item not in values:
+            values.append(value_item)
+        if  != value_item:
+            all_same = False
+            break
     return all_same
 
 

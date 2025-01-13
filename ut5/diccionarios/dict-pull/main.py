@@ -1,5 +1,5 @@
 def run(data: dict, target_keys: tuple) -> dict:
-    # TODO
+    pdata = {key: data.get(key) for key in data if key in target_keys}
     return pdata
 
 
