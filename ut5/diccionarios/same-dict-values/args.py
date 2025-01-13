@@ -1,2 +1,2 @@
-items = {1: 'a', 2: 'a', 3: 'a', 4: 'a'}
+items = {1: 'a', 2: 'b', 3: 'c', 4: 'd'}
 all_same = True
