@@ -1,0 +1,10 @@
+components1 = 1
+components2 = 2
+components3 = 3
+components4 = 4
+components5 = 5
+components6 = 6
+components7 = 7
+components8 = 8
+valid = True
+formula = [1, 3, 7, 5]

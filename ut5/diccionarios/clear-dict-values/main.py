@@ -1,5 +1,6 @@
 def run(items: dict) -> dict:
-    # TODO
+    values = []
+    citems = {key: values for key in items}
     return citems
 
 

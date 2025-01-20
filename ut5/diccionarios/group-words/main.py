@@ -1,5 +1,12 @@
 def run(words: list) -> dict:
-    # TODO
+    group_words = {}
+    values = ''
+    for item in words:
+        key_group_words = item[0][0]
+        if item != values:
+            values = item
+
+            group_words[key_group_words] = values
     return group_words
 
 

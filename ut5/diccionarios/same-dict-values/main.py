@@ -1,5 +1,11 @@
 def run(items: dict) -> bool:
-    # TODO
+    items_values = list(items.values())
+    all_same = True
+    for item in items_values:
+        value = items_values[0]
+        if value != item:
+            all_same = False
+            break
     return all_same
 
 

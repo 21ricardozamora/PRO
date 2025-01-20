@@ -1,14 +1,14 @@
 def run(ids: list) -> int:
+    ONE = 1
+    first_unused_id = 0
     sorted_ids = sorted(ids)
-    possible_id = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    possible_id_index = possible_id[0]
-    for id in sorted_ids:
-        if possible_id_index not in sorted_ids:
-            first_unused_id = possible_id_index
-            break
-        possible_id_index += 1
-        if sorted_ids[-1] in possible_id:
-            first_unused_id = possible_id_index
+    if ONE not in sorted_ids:
+        first_unused_id = ONE
+    else:
+        for _id in sorted_ids:
+            if _id + ONE not in sorted_ids:
+                first_unused_id = _id + ONE
+                break
     return first_unused_id
 
 
