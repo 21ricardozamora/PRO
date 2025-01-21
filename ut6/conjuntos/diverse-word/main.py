@@ -1,11 +1,13 @@
 def run(words: list) -> str:
+    valid_item = words[0]
+    size_item = len(set(valid_item))
     dword = ''
     for item in words:
-        valid_item = item
-        len_item = len(set(valid_item))
-        if len_item < len(set(item)):
+        if size_item < len(set(item)):
             valid_item = item
-        dword = valid_item
+            size_item = len(set(valid_item))
+
+    dword = valid_item
 
     return dword
 
