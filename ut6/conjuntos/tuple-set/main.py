@@ -1,9 +1,9 @@
 def run(input: tuple) -> tuple[set, set]:
     value1 = set()
     value2 = set()
-    for item in input:
-        value1.add(item[0])
-        value2.add(item[1])
+    for item1, item2 in input:
+        value1.add(item1)
+        value2.add(item2)
     output = value1, value2
     return output
 
