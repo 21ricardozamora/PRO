@@ -1,5 +1,10 @@
 def run(number: str) -> bool:
-    # TODO
+    BIN_NUMS = frozenset(('0', '1'))
+    binary = True
+    for num in number:
+        if num not in BIN_NUMS:
+            binary = False
+            break
     return binary
 
 
