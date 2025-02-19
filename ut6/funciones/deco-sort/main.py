@@ -1,4 +1,11 @@
-# TODO
+def sort(asc=True):
+    def decorator(func):
+        def wrapper(*args):
+            return sorted(func(*args), reverse=not asc)
+
+        return wrapper
+
+    return decorator
 
 
 @sort(asc=False)
