@@ -1,10 +1,11 @@
 def factorial(n):
+    x = 0
     if n == 0:
         return 1
     if n < 0:
         return None
     for num in range(n, 1, -1):
-        x = n * (num + 1)
+        x += n * (num - 1)
     return x
 
 
