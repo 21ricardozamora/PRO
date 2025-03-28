@@ -1,0 +1,9 @@
+slug = "poker-card"
+bundle = [
+    "docs/README.pdf",
+    "tests/*.py",
+    "main.py",
+    "vendor.py",
+    "data/glyphs.dat",
+]
+todo = ["main.py"]
