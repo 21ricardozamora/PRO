@@ -32,15 +32,17 @@ class DNA:
         return num_thymines
     
     def __add__(self, other: DNA) -> DNA:
+        dna = []
+        lenght_dna1 = len(self.sequence)
+        lenght_dna2 = len(other.sequence)
         for dna1, dna2 in zip(self.sequence, other.sequence):
-            dna = ''
-            lenght_dna1 = len(dna1)
-            lenght_dna2 = len(dna2)
-            if lenght_dna1 < lenght_dna2:
-                dna = dna2 + dna1
-            else:
-                dna = dna1 + dna2
-        return dna
+            dna.append(dna1)
+            dna.append(dna2)
+        if lenght_dna1 > lenght_dna2:
+            dna.append(self.sequence[lenght_dna2:])
+        elif lenght_dna1 < lenght_dna2:
+            dna.append(other.sequence[lenght_dna1:])
+        return DNA(''.join(dna))
 
     def stats(self) -> dict[str,float]:
         pass
