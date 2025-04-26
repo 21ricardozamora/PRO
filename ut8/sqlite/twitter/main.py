@@ -2,31 +2,39 @@ from __future__ import annotations
 
 import sqlite3
 
-DB_PATH = 'text.db'
+DB_PATH = 'twitter.db'
 
 
-def create_db(DB_PATH: str):
-    con = sqlite3.connect(DB_PATH)
+def create_db(db_path: str) -> None:
+    con = sqlite3.connect(db_path)
     cur = con.cursor()
 
-    sql_user = """CREATE TABLE user(
-    id integer primary key
-    username TEXT
-    password TEXT
-    bio TEXT)
-"""
+    sql = """
+    CREATE TABLE IF NOT EXISTS user (
+        id INTEGER PRIMARY KEY,
+        username TEXT,
+        password TEXT,
+        bio TEXT
+    );
 
-    sql_tuit = """CREATE TABLE tuit(
-    id INTEGER PRIMARY KEY
-    content TEXT
-    user_id INTEGER FOREING KEY
-    retweet_from TEXT FOREING KEY)
-"""
+    CREATE TABLE IF NOT EXISTS tweet (
+        id INTEGER PRIMARY KEY,
+        content TEXT,
+        user_id INTEGER,
+        retweet_from TEXT,
+        FOREIGN KEY (user_id) REFERENCES user(id),
+        FOREIGN KEY (retweet_from) REFERENCES user(username)
+    )
+    """
+
+    cur.executescript(sql)
+
+    con.commit()
 
 
 class User:
     con = sqlite3.connect(DB_PATH)
-    con_rows = sqlite3.Row
+    con.row_factory = sqlite3.Row
     cur = con.cursor()
 
     def __init__(self, username: str, password: str, bio: str = '', user_id: int = 0):
@@ -37,10 +45,28 @@ class User:
         logged = True
 
     def save(self) -> None:
-        pass
+        con = sqlite3.connect(DB_PATH)
+        cur = con.cursor()
+        cur.execute(
+            'INSERT INTO user(id,username,password,bio) VALUES (?,?,?,?)',
+            (self.user_id, self.username, self.password, self.bio),
+        )
+        con.commit()
+        self.id = cur.lastrowid
+        con.close()
 
     def login(self, password: str) -> None:
-        pass
+        con = sqlite3.connect(DB_PATH)
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        sql = 'SELECT * FROM user WHERE username = ?'
+        result = cur.execute(sql, (self.username,))
+        row = result.fetchone()
+        if row:
+            if row['password'] == self.password:
+                self.password = row['password']
+                self.bio = row['bio']
+                self.user_id = row['user_id']
 
     def tweet(self, content: str) -> Tweet:
         pass
@@ -53,9 +79,9 @@ class User:
 
 
 class Tweet:
-    con_tweet = sqlite3.connect(DB_PATH)
-    con_rows_tweet = sqlite3.Row
-    cur = con_tweet.cursor()
+    con = sqlite3.connect(DB_PATH)
+    con_rows = sqlite3.Row
+    cur = con.cursor()
 
     def __init__(self, content: str = '', retweet_from: int = 0, tweet_id: int = 0):
         self.content = content
@@ -79,9 +105,9 @@ class Tweet:
 
 
 class Twitter:
-    con_twitter = sqlite3.connect(DB_PATH)
-    con_rows_twitter = sqlite3.Row
-    cur = con_twitter.cursor()
+    con = sqlite3.connect(DB_PATH)
+    con_rows = sqlite3.Row
+    cur = con.cursor()
 
     def add_user(self, username: str, password: str, bio: str = '') -> User:
         pass
