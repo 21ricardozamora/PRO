@@ -3,6 +3,7 @@ from __future__ import annotations
 import sqlite3
 
 DB_PATH = 'twitter.db'
+MAX_LENGHT_CHARS = 280
 
 
 def create_db(db_path: str) -> None:
@@ -11,7 +12,7 @@ def create_db(db_path: str) -> None:
 
     sql = """
     CREATE TABLE IF NOT EXISTS user (
-        id INTEGER PRIMARY KEY,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT,
         password TEXT,
         bio TEXT
@@ -42,34 +43,36 @@ class User:
         self.password = password
         self.bio = bio
         self.user_id = user_id
-        logged = True
+        self.logged = True
 
     def save(self) -> None:
-        con = sqlite3.connect(DB_PATH)
-        cur = con.cursor()
-        cur.execute(
-            'INSERT INTO user(id,username,password,bio) VALUES (?,?,?,?)',
-            (self.user_id, self.username, self.password, self.bio),
+        sql = 'INSERT INTO user(username, password, bio) VALUES (?, ?, ?)'
+        User.cur.execute(
+            sql,
+            (self.username, self.password, self.bio),
         )
-        con.commit()
-        self.id = cur.lastrowid
-        con.close()
+        User.con.commit()
+        self.id = User.cur.lastrowid
 
     def login(self, password: str) -> None:
-        con = sqlite3.connect(DB_PATH)
-        con.row_factory = sqlite3.Row
-        cur = con.cursor()
-        sql = 'SELECT * FROM user WHERE username = ?'
-        result = cur.execute(sql, (self.username,))
+        sql = 'SELECT * FROM user WHERE username = ?, password = ?'
+        result = User.cur.execute(sql, (self.username, password))
         row = result.fetchone()
         if row:
             if row['password'] == self.password:
                 self.password = row['password']
                 self.bio = row['bio']
-                self.user_id = row['user_id']
+                self.user_id = row['id']
 
     def tweet(self, content: str) -> Tweet:
-        pass
+        self.content = content
+        if not self.logged:
+            raise TwitterError(f'User {self.username} is not logged in')
+        if len(self.content) > MAX_LENGHT_CHARS:
+            raise TwitterError('Tweet has more than 280 chars!')
+        new_tweet = Tweet(content=self.content, tweet_id=0, retweet_from=0)
+        self.save(new_tweet)
+        return new_tweet
 
     def retweet(self, tweet_id: int) -> Tweet:
         pass
@@ -91,11 +94,14 @@ class Tweet:
     def is_retweet(self) -> bool:
         pass
 
+    @property
     def content(self) -> str:
         pass
 
     def save(self, user: User) -> None:
-        pass
+        sql = 'INSERT INTO tweet(content, user_id, retweet_from) VALUES (?, ?, ?)'
+        result = Tweet.cur.execute(sql, (self.content, self.tweet_id, self.retweet_from))
+        row = result.fetchall
 
     def __repr__(self):
         pass
@@ -116,5 +122,5 @@ class Twitter:
         pass
 
 
-class TwitterError:
+class TwitterError(Exception):
     pass
