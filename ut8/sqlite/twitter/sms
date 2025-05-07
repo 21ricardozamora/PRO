@@ -53,7 +53,7 @@ class SIM(DbHandler):
 
     def unlock(self, pin: str, *, puk: str = '') -> None:
         sql = 'SELECT pin, puk FROM access WHERE phone_number = ?'
-        sim_data = self.cur.execute(sql, (self.phone_number,)).fetchone()
+        sim_data = self.cur.execute(sql, (self.phone_number,)).fetchone()    #El fetchone final nos asegura quedarnos con la primera ocurrencia en la consulta sql    
 
         correct_pin = sim_data['pin']
         correct_puk = sim_data['puk']
